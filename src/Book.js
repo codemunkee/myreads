@@ -7,7 +7,6 @@ class Book extends Component {
     book: PropTypes.object.isRequired,
   };
 
-
   render() {
     const { book } = this.props;
     return (
