@@ -4,27 +4,22 @@ import PropTypes from 'prop-types'
 
 const Bookshelf = ({shelfTitle, shelfType, books, updateBookshelf}) => {
 
-  const updateShelf = (bookID, shelfType) => {
-    // callback to main App where we keep state for the books
-    updateBookshelf(bookID, shelfType);
-  };
-
   return (
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{ shelfTitle }</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            { books.filter(book => book.shelf === shelfType)
-              .map(book => (
-                <li key={book.id}>
-                  <Book
-                    book={book}
-                    updateShelf={updateShelf}
-                  />
-                </li>))}
-          </ol>
-        </div>
+    <div className="bookshelf">
+      <h2 className="bookshelf-title">{ shelfTitle }</h2>
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          { books.filter(book => book.shelf === shelfType)
+            .map(book => (
+              <li key={book.id}>
+                <Book
+                  book={book}
+                  updateShelf={updateBookshelf}
+                />
+              </li>))}
+        </ol>
       </div>
+    </div>
   )
 };
 

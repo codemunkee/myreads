@@ -23,9 +23,17 @@ class BooksApp extends React.Component {
     });
   }
 
-  updateBookshelf(bookID, shelf) {
-    console.log('Updating shelf for ', bookID, shelf);
-  }
+  updateBookshelf = (book, shelf) => {
+    console.log('Updating shelf for ', book, shelf);
+    BooksAPI.update(book, shelf).then(resp => {
+      // On a successful API response we could manually update the book that's been updated
+      // in our local state (more efficient) but instead we just pull down all books from the
+      // API to keep it simple and guarantee our view state matches the model
+      BooksAPI.getAll().then((books) => {
+        this.setState({books});
+      });
+    });
+  };
 
   render() {
     return (

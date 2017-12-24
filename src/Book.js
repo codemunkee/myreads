@@ -5,7 +5,7 @@ const Book = ({book, updateShelf}) => {
 
   const onShelfSelect = event => {
     // callsBack to Bookshelf, event.target.value === shelfType
-    updateShelf(book.id, event.target.value);
+    updateShelf(book, event.target.value);
   };
 
   return (
@@ -17,7 +17,7 @@ const Book = ({book, updateShelf}) => {
                       backgroundImage: 'url("' + book.imageLinks.smallThumbnail + '")' }}>
         </div>
           <div className="book-shelf-changer">
-            <select onChange={onShelfSelect}>
+            <select onChange={onShelfSelect} defaultValue={book.shelf}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
