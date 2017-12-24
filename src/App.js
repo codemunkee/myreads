@@ -23,6 +23,10 @@ class BooksApp extends React.Component {
     });
   }
 
+  updateBookshelf(bookID, shelf) {
+    console.log('Updating shelf for ', bookID, shelf);
+  }
+
   render() {
     return (
       <div className="app">
@@ -58,16 +62,19 @@ class BooksApp extends React.Component {
                   shelfTitle="Currently Reading"
                   shelfType="currentlyReading"
                   books={this.state.books}
+                  updateBookshelf={this.updateBookshelf}
                 />
                 <Bookshelf
                   shelfTitle="Want to Read"
                   shelfType="wantToRead"
                   books={this.state.books}
+                  updateBookshelf={this.updateBookshelf}
                 />
                 <Bookshelf
                   shelfTitle="Read"
                   shelfType="read"
                   books={this.state.books}
+                  updateBookshelf={this.updateBookshelf}
                 />
               </div>
             </div>

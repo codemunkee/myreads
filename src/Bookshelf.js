@@ -2,10 +2,11 @@ import React from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
 
-const Bookshelf = ({shelfTitle, shelfType, books}) => {
+const Bookshelf = ({shelfTitle, shelfType, books, updateBookshelf}) => {
 
   const updateShelf = (bookID, shelfType) => {
-    console.log(bookID, shelfType);
+    // callback to main App where we keep state for the books
+    updateBookshelf(bookID, shelfType);
   };
 
   return (
@@ -30,7 +31,8 @@ const Bookshelf = ({shelfTitle, shelfType, books}) => {
 Bookshelf.propTypes = {
   shelfTitle: PropTypes.string.isRequired,
   shelfType: PropTypes.string.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  updateBookshelf: PropTypes.func.isRequired
 };
 
 export default Bookshelf
