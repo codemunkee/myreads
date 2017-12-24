@@ -5,6 +5,12 @@ class Book extends Component {
 
   static propTypes = {
     book: PropTypes.object.isRequired,
+    //updateShelf: PropTypes.function.isRequired,
+  };
+
+  onShelfSelect = event => {
+    // callsBack to Bookshelf, event.target.value === shelfType
+    this.props.updateShelf(this.props.book.id, event.target.value);
   };
 
   render() {
@@ -17,7 +23,7 @@ class Book extends Component {
                                                backgroundImage: 'url("' + book.imageLinks.smallThumbnail + '")' }}>
           </div>
             <div className="book-shelf-changer">
-              <select>
+              <select onChange={this.onShelfSelect}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>

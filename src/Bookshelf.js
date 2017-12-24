@@ -3,13 +3,24 @@ import Book from './Book'
 import PropTypes from 'prop-types'
 
 const Bookshelf = ({shelfTitle, shelfType, books}) => {
+
+  const updateShelf = (bookID, shelfType) => {
+    console.log(bookID, shelfType);
+  };
+
   return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{ shelfTitle }</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             { books.filter(book => book.shelf === shelfType)
-              .map(book => (<li key={book.id}><Book book={book} /></li>))}
+              .map(book => (
+                <li key={book.id}>
+                  <Book
+                    book={book}
+                    updateShelf={updateShelf}
+                  />
+                </li>))}
           </ol>
         </div>
       </div>
