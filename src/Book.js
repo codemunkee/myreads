@@ -18,7 +18,7 @@ const Book = ({book, updateShelf}) => {
         </div>
           <div className="book-shelf-changer">
             <select onChange={onShelfSelect} defaultValue={book.shelf}>
-              <option value="none" disabled>Move to...</option>
+              <option value="nope" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
@@ -27,7 +27,8 @@ const Book = ({book, updateShelf}) => {
           </div>
         </div>
       <div className="book-title">{book.name}</div>
-      <div className="book-authors">{book.authors[0]}</div>
+      { book.authors.map(author => ( <div className="book-authors" key={author}>{author}</div> )) }
+
     </div>
   )
 };
