@@ -20,7 +20,6 @@ class Search extends React.Component {
     if (query.length > 0) {
       BooksAPI.search(event.target.value)
         .then(resp => {
-          console.log(resp);
           this.setState({bookResults: resp});
         })
         .catch(e => { console.log('Searching for "' + query + '" gave us:\n ' + e)});
