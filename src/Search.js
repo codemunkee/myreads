@@ -8,7 +8,8 @@ import PropTypes from 'prop-types'
 class Search extends React.Component {
 
   static propTypes = {
-    updateBookshelf: PropTypes.func.isRequired
+    updateBookshelf: PropTypes.func.isRequired,
+    ourBooks: PropTypes.func.isRequired
   };
 
   state = {
@@ -20,7 +21,23 @@ class Search extends React.Component {
     if (query.length > 0) {
       BooksAPI.search(event.target.value)
         .then(resp => {
-          this.setState({bookResults: resp});
+          // get our bookshelf books
+          const ourBooks = this.props.ourBooks();
+
+          // resp is an array of book objects that match our search
+          const results = resp.map(book => {
+            // check if the books is in our bookshelf books
+            const bookMatch = ourBooks.filter(ourBook => ourBook.id === book.id);
+            // if it is return the matched book in OUR book list,
+            // this is important because it lets us indicate what shelf a book is ALREADY on if it
+            // appears in our search results.
+            if (bookMatch.length > 0) {
+              return bookMatch[0];
+            } else {
+              return book;
+            }
+          });
+          this.setState({bookResults: results});
         })
         .catch(e => { console.log('Searching for "' + query + '" gave us:\n ' + e)});
     } else {
